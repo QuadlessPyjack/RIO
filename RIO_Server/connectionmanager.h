@@ -1,10 +1,19 @@
 #ifndef CONNECTIONMANAGER_H
 #define CONNECTIONMANAGER_H
 
-#include "persistence.h"
-
 #include <QObject>
-#include <QSslSocket>
+#include <QMap>
+#include <QPair>
+
+// forward declarations
+class Persistence;
+class SslServer;
+class QTcpSocket;
+class QTimer;
+
+namespace RIOProtocol {
+    struct Payload;
+}
 
 class ConnectionManager : public QObject
 {
@@ -12,15 +21,29 @@ class ConnectionManager : public QObject
 public:
     explicit ConnectionManager(QObject *parent = nullptr);
 
+    void Init();
+
+    ~ConnectionManager();
 signals:
 
 public slots:
+    void onTimerReset();
+    void onTimerStart();
+    void onClientConnected(QTcpSocket *clientSocket);
 
 private:
-    QSslSocket *m_statsSocket;
-    QSslSocket *m_connSocket;
+    void handleIncomingData(RIOProtocol::Payload p, QTcpSocket *clientSocket);
+    void disconnectClient();
 
-    Persistence m_persistence;
+    QMap<QString,QPair<QTcpSocket*,QTcpSocket*>> m_connectedClients;
+
+    int m_timeoutMs;
+    QTimer *m_timeoutTimer;
+    Persistence *m_persistence;
+    SslServer *m_statsServer;
+    SslServer *m_connServer;
+    void startListening();
+    void deinit();
 };
 
 #endif // CONNECTIONMANAGER_H

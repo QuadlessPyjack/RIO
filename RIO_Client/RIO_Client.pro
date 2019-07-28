@@ -1,24 +1,21 @@
-QT -= gui
-QT += network sql
-
-CONFIG += c++11 console
-CONFIG -= app_bundle
+QT += quick network widgets charts
+CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    connectionmanager.cpp \
-    persistence.cpp \
-    sslserver.cpp
+    sslclient.cpp \
+    appmanager.cpp
 
-RESOURCES += \
-    resources.qrc
+RESOURCES += qml.qrc
+
+# Additional import path used to resolve QML modules in Qt Creator's code model
+QML_IMPORT_PATH =
 
 HEADERS += \
-    persistence.h \
-    connectionmanager.h \
-    sslserver.h
+    sslclient.h \
+    appmanager.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../RIO_protocol/release/ -lRIO_protocol
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../RIO_protocol/debug/ -lRIO_protocol

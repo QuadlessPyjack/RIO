@@ -1,2 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>certificates/client_local.key</file>
+        <file>certificates/client_local.pem</file>
+        <file>certificates/server_ca.pem</file>
+    </qresource>
+</RCC>

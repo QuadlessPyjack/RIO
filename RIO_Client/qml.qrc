@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Components/InputField.qml</file>
+        <file>Windows/DetailsWindow.qml</file>
+        <file>certificates/server_local.key</file>
+        <file>certificates/server_local.pem</file>
+        <file>appmanager.cpp</file>
+        <file>appmanager.h</file>
+        <file>main.cpp</file>
+        <file>sslclient.cpp</file>
+        <file>sslclient.h</file>
+    </qresource>
+</RCC>
