@@ -1,0 +1,4 @@
+#ignore user settings
+*.pro.user
+#ignore local build folder
+/build-*/*

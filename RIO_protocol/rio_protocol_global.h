@@ -1,0 +1,12 @@
+#ifndef RIO_PROTOCOL_GLOBAL_H
+#define RIO_PROTOCOL_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(RIO_PROTOCOL_LIBRARY)
+#  define RIO_PROTOCOLSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define RIO_PROTOCOLSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // RIO_PROTOCOL_GLOBAL_H
