@@ -1,5 +1,3 @@
-h1 { margin-bottom: 0.21cm; background: transparent none repeat scroll 0% 0%; page-break-after: avoid; }h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold; }h1.cjk { font-family: "Liberation Sans"; font-size: 18pt; font-weight: bold; }h1.ctl { font-family: "Noto Sans Devanagari"; font-size: 18pt; font-weight: bold; }p { margin-bottom: 0.25cm; line-height: 115%; background: transparent none repeat scroll 0% 0%; }
-
 **RIO
 SSH Client-Server Demo**
 
