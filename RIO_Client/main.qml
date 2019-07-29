@@ -9,45 +9,42 @@ import "Windows"
 import "Components"
 
 Window {
+    id: root
     visible: true
     width: 310
     height: 600
     title: qsTr("RIO Client")
-
-    Component.onCompleted: {
-        console.log("Window loaded!");
-    }
+    property bool isConnected: false
 
     Connections {
         target: AppManager
         onConnectedToServer: {
-            btnConnection.isServerConnected = true;
-            btnConnection.text = "Disconnect";
+            root.isConnected = true;
+            btnConnection.text = qsTr("Disconnect");
             console.log("isServerConnected: " + btnConnection.isServerConnected);
         }
 
         onDisconnectedFromServer: {
-            btnConnection.isServerConnected = false;
-            btnConnection.text = "Connect";
+            root.isConnected = false;
+            btnConnection.text = qsTr("Connect");
             console.log("isServerConnected: " + btnConnection.isServerConnected);
         }
     }
 
     Button {
         id: btnConnection
-        property bool isServerConnected: false
+        property bool isServerConnected: root.isConnected
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 10
 
-        text: "Connect"
+        text: qsTr("Connect")
         onClicked: {
-            //console.log("server connected: " + isServerConnected);
             if(isServerConnected) {
-                text = "Connect";
+                text = qsTr("Connect");
                 AppManager.disconnectFromServer();
             } else {
-                text = "Disconnect";
+                text = qsTr("Disconnect");
                 AppManager.connectToServer();
             }
         }
@@ -63,9 +60,9 @@ Window {
             Layout.fillWidth: true
             Layout.preferredHeight: 15
 
-            labelText: "Transmit Info Interval (s):"
+            labelText: qsTr("Transmit Info Interval (s):")
             textInput: "5"
-            buttonCaption: "Apply"
+            buttonCaption: qsTr("Apply")
             onButtonClicked: {
                 AppManager.transmitInterval = textInput;
                 console.log("Setting timeout to: " + textInput);
@@ -75,14 +72,13 @@ Window {
         InputField {
             Layout.fillWidth: true
             Layout.preferredHeight: 15
-
-            labelText: "Message:"
-            placeholderText: "Write message to send here..."
-            buttonCaption: "Send"
+            buttonEnabled: root.isConnected
+            labelText: qsTr("Message:")
+            placeholderText: qsTr("Write message to send here...")
+            buttonCaption: qsTr("Send")
             onButtonClicked: {
                 AppManager.inputMessage = textInput;
                 AppManager.inputMessageChanged();
-                console.log("Message input is: " + textInput);
             }
         }
 
@@ -91,7 +87,7 @@ Window {
             Layout.alignment: Qt.AlignBottom
             Layout.bottomMargin: 10
 
-            text: "Connection details..."
+            text: qsTr("Connection details...")
             onClicked: {
                 windowConnectionDetails.show();
             }

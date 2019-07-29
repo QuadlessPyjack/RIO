@@ -84,8 +84,11 @@ namespace RIOProtocol
     #include <QDebug>
     #endif
 
-    inline void RIO_PROTOCOLSHARED_EXPORT printPayload(const Payload &p)
+    inline void printPayload(const Payload &p)
     {
+        #ifndef DEBUG_ENABLED
+            Q_UNUSED(p)
+        #endif
         #ifdef DEBUG_ENABLED
             qDebug() << "version: " << p.version << " type: " << p.payloadType << "\n content size: " << p.payloadCount << "\n content: " << p.data;
         #endif

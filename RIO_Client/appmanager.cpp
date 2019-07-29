@@ -41,8 +41,8 @@ void AppManager::addDisconnectSpike()
     }
 
     QPointF disconnectPoint;
-    QPointF zeroPointPre = QPointF(m_latencyXMax - 0.2,0);
-    QPointF zeroPointPost = QPointF(m_latencyXMax + 0.2,0);
+    QPointF zeroPointPre = QPointF(m_latencyXMax - 0.1,0);
+    QPointF zeroPointPost = QPointF(m_latencyXMax + 0.1,0);
     disconnectPoint.setX(m_latencyXMax);
     disconnectPoint.setY(m_latencyYMax);
     QtCharts::QXYSeries *points = static_cast<QtCharts::QXYSeries*>(m_disconnectSeries);

@@ -7,6 +7,7 @@ Item {
     property string placeholderText
     property string buttonCaption
     property alias textInput: txtField.text
+    property alias buttonEnabled: btnInputField.enabled
     signal buttonClicked()
 
 

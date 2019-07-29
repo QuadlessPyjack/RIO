@@ -17,11 +17,8 @@ Item {
     Connections {
         target: AppManager
         onLatencyChanged: {
-            console.log("Updating latency points");
             AppManager.clearLatencyPlotData(chartView.series(0));
             AppManager.updateLatencyPlotData(chartView.series(0));
-            //chartView.zoom(0.0);
-            //chartView.update();
         }
     }
 
@@ -34,21 +31,22 @@ Item {
         Column {
             anchors.fill: parent
             Rectangle {
-                color: "gray"
+                color: "lightgray"
                 border.color: "black"
                 width: parent.width
                 height: parent.height * 0.3
 
                 Column {
+                    spacing: 5
                         Text {
-                            text: "Disconnects from user: " + AppManager.userDisconnects
+                            text: qsTr("Disconnects from user: ") + AppManager.userDisconnects
                         }
                         Text {
-                            var serverDisconnects = parseInt(AppManager.serverDisconnects) - parseInt(AppManager.userDisconnects)
-                            text: "Disconnects from server: " + serverDisconnects
+                            property int serverDisconnects: parseInt(AppManager.serverDisconnects) - parseInt(AppManager.userDisconnects)
+                            text: qsTr("Disconnects from server: ") + serverDisconnects
                         }
                         Text {
-                            text: "Disconnects total: " + AppManager.serverDisconnects
+                            text: qsTr("Disconnects total: ") + AppManager.serverDisconnects
                         }
                 }
             }
@@ -59,7 +57,7 @@ Item {
                 height: parent.height * 0.6
                 theme: ChartView.ChartThemeBlueIcy
                 antialiasing: true
-                title: "Latency"
+                title: qsTr("Latency")
 
                 ValueAxis {
                     id: vaX
@@ -75,14 +73,14 @@ Item {
 
                 LineSeries {
                     id: lineSeries
-                    name: "microseconds"
+                    name: "μs"
                     axisX: vaX
                     axisY: vaY
                 }
 
                 LineSeries {
                     id: disconnectSeries
-                    name: "disconnections"
+                    name: qsTr("disconnections")
                     axisX: vaX
                     axisY: vaY
                     color: "red"

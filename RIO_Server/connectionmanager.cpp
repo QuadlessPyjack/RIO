@@ -130,7 +130,6 @@ void ConnectionManager::onClientConnected(QTcpSocket *clientSocket)
     }
 
     m_connectedClients.insert(clientAddress, client);
-    m_persistence;
 }
 
 void ConnectionManager::handleIncomingData(RIOProtocol::Payload p, QTcpSocket *clientSocket)
